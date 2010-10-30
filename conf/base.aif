@@ -1,0 +1,27 @@
+# this config explains the (all) available options.
+# the variables are optional and we define their defaults here (so you could omit the
+# definitions), unless otherwise specified.
+
+SOURCE=net
+#FILE_URL=file:///src/core/pkg
+SYNC_URL=http://mirror.rit.edu/archlinux/core/os/x86_64
+HARDWARECLOCK=UTC
+TIMEZONE=America/Denver
+# Do you want to have additional pacman repositories or packages available at runtime (during installation)?
+# RUNTIME_REPOSITORIES = array like this ('name1' 'location of repo 1' ['name2' 'location of repo2',..])
+RUNTIME_REPOSITORIES=
+# space separated list
+RUNTIME_PACKAGES=
+
+# packages to install
+TARGET_GROUPS=base       # all packages in this group will be installed (defaults to base if no group and no packages are specified)
+TARGET_PACKAGES_EXCLUDE='nano reiserfsprogs'
+TARGET_PACKAGES=openssh # you can also specify separate packages to install (this is empty by default)
+
+# These variables are mandatory
+
+GRUB_DEVICE=/dev/vda
+PARTITIONS='/dev/vda 100:ext2:+ 512:swap *:ext4'
+BLOCKDATA='/dev/vda1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_params
+/dev/vda2 raw no_label swap;yes;no_mountpoint;target;no_opts;no_label;no_params
+/dev/vda3 raw no_label ext4;yes;/;target;no_opts;no_label;no_params'

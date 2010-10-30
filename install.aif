@@ -1,0 +1,41 @@
+# this config explains the (all) available options.
+# the variables are optional and we define their defaults here (so you could omit the
+# definitions), unless otherwise specified.
+
+SOURCE=net
+#FILE_URL=file:///src/core/pkg
+SYNC_URL=http://mirror.rit.edu/archlinux/core/os/x86_64
+HARDWARECLOCK=UTC
+TIMEZONE=America/Denver
+# Do you want to have additional pacman repositories or packages available at runtime (during installation)?
+# RUNTIME_REPOSITORIES = array like this ('name1' 'location of repo 1' ['name2' 'location of repo2',..])
+RUNTIME_REPOSITORIES=
+# space separated list
+RUNTIME_PACKAGES=
+var_TARGET_DIR=/tmp/target
+PACMAN_TARGET="pacman --root $var_TARGET_DIR --config /tmp/pacman.conf"
+
+# packages to install
+TARGET_GROUPS=base       # all packages in this group will be installed (defaults to base if no group and no packages are specified)
+TARGET_PACKAGES_EXCLUDE='nano'
+TARGET_PACKAGES=openssh # you can also specify separate packages to install (this is empty by default)
+
+# you can optionally also override some functions...
+worker_intro () {
+	inform "Automatic procedure running the generic-install-on-sda example config.  THIS WILL ERASE AND OVERWRITE YOUR /DEV/SDA.  IF YOU DO NOT WANT THIS PRESS CTRL+C WITHIN 10 SECONDS"
+	sleep 10
+}
+
+worker_configure_system () {
+	prefill_configs
+	sed -i 's/^HOSTNAME="myhost"/HOSTNAME="arch-generic-install"/' $var_TARGET_DIR/etc/rc.conf
+}
+
+
+# These variables are mandatory
+
+GRUB_DEVICE=/dev/nbd0
+PARTITIONS='/dev/nbd0 100:ext2:+ 512:swap *:ext4'
+BLOCKDATA='/dev/nbd0p1 raw no_label ext2;yes;/boot;target;no_opts;no_label;no_params
+/dev/nbd0p2 raw no_label swap;yes;no_mountpoint;target;no_opts;no_label;no_params
+/dev/nbd0p3 raw no_label ext4;yes;/;target;no_opts;no_label;no_params'

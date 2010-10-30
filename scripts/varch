@@ -1,0 +1,49 @@
+#!/usr/bin/python
+import os
+import sys
+import optparse
+
+import varch
+
+def parse():
+    '''
+    Parse arguments
+    '''
+    parser = optparse.OptionParser()
+    parser.add_option('-c',
+            '--config',
+            '--conf',
+            dest='conf',
+            default='/etc/varch/base.aif',
+            help='The location to the Archlinux Instalation Framework file; default=/etc/varch/base.aif')
+    parser.add_option('-f',
+            '--format',
+            dest='format',
+            default='raw',
+            help='The disk image format to use, raw or qcow2; default=raw')
+    parser.add_option('-s',
+            '--size',
+            dest='size',
+            default='20G',
+            help='The size of the disk image, default=20G')
+    parser.add_option('-i',
+            '--image',
+            dest='image',
+            default='arch',
+            help='The location of the image after it has been created, if not supplied an extension based on the format type will be appended; default=arch')
+
+    options, args = parser.parse_args()
+
+    opts = {}
+    opts['conf'] = options.conf
+    opts['format'] = options.format
+    opts['size'] = options.size
+    opts['image'] = options.image
+
+    return opts
+
+
+if __name__ == '__main__':
+    opts = parse()
+    v_arch = varch.VArch(opts)
+    v_arch.make_vm()
