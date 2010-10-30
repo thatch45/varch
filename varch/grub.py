@@ -72,7 +72,6 @@ class Grub:
                 + 'root ' + grub_root + '\n'\
                 + 'setup (hd0)\n'\
                 + 'quit\n'
-        print(g_lines)
         g_lines = str.encode(g_lines)
 
         grub = subprocess.Popen(g_cmd, shell=True, stdin=subprocess.PIPE)
