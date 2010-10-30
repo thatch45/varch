@@ -31,6 +31,12 @@ def parse():
             dest='image',
             default='arch',
             help='The location of the image after it has been created, if not supplied an extension based on the format type will be appended; default=arch')
+    parser.add_option('-g',
+            '--generic',
+            dest='generic',
+            default=False,
+            action='store_true',
+            help='Generate a generic virtual machine image for use on non-kvm virtual machine monitors, like virtualbox, vmware etc.')
 
     options, args = parser.parse_args()
 
@@ -39,6 +45,7 @@ def parse():
     opts['format'] = options.format
     opts['size'] = options.size
     opts['image'] = options.image
+    opts['generic'] = options.generic
 
     return opts
 

@@ -29,7 +29,10 @@ class Grub:
                 grub_root = lines[ind][lines[ind].index('('):]
             if lines[ind].startswith('kernel'):
                 s = lines[ind]
-                lines[ind] = s.replace(self.nbd + 'p', '/dev/vda')
+                if self.opts['generic']:
+                    lines[ind] = s.replace(self.nbd + 'p', '/dev/sda')
+                else:
+                    lines[ind] = s.replace(self.nbd + 'p', '/dev/vda')
         open(lst, 'w').writelines(lines)
         return grub_root
 
@@ -44,7 +47,10 @@ class Grub:
                 continue
             if lines[ind].startswith('/dev/mapper/loop'):
                 s = lines[ind]
-                lines[ind] = s.replace(self.nbd + 'p', '/dev/vda')
+                if self.opts['generic']:
+                    lines[ind] = s.replace(self.nbd + 'p', '/dev/sda')
+                else:
+                    lines[ind] = s.replace(self.nbd + 'p', '/dev/vda')
         open(fstab, 'w').writelines(lines)
 
     def _copy_stages(self):

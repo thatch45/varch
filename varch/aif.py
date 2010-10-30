@@ -41,11 +41,12 @@ class AIF:
                 sys.exit()
         lines.append('var_TARGET_DIR=' + target  + '\n')
         lines.append('PACMAN_TARGET="pacman --root $var_TARGET_DIR --config /tmp/pacman.conf"\n')
-        lines.extend(['\nworker_mkinitcpio ()\n',
-        '{\n',
-        'sed -i s,MODULES=\\",MODULES=\\"virtio\\ virtio_blk\\ virtio_pci\\ , $var_TARGET_DIR/etc/mkinitcpio.conf\n',
-        'run_mkinitcpio\n',
-        '}\n'])
+        if not self.opts['generic']:
+            lines.extend(['\nworker_mkinitcpio ()\n',
+            '{\n',
+            'sed -i s,MODULES=\\",MODULES=\\"virtio\\ virtio_blk\\ virtio_pci\\ , $var_TARGET_DIR/etc/mkinitcpio.conf\n',
+            'run_mkinitcpio\n',
+            '}\n'])
         aif = '/tmp/working.aif'
         open(aif, 'w+').writelines(lines)
         return aif, target
