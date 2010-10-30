@@ -4,7 +4,7 @@
 
 SOURCE=net
 #FILE_URL=file:///src/core/pkg
-SYNC_URL=http://mirror.rit.edu/archlinux/core/os/x86_64
+SYNC_URL=http://mirror.rit.edu/archlinux/\$repo/os/x86_64
 HARDWARECLOCK=UTC
 TIMEZONE=America/Denver
 # Do you want to have additional pacman repositories or packages available at runtime (during installation)?
