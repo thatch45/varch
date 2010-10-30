@@ -12,8 +12,8 @@ depends=('python'
          'aif')
 makedepends=('python')
 options=(!emptydirs)
-source=('http://varch.googlecode.com/files/varch-0.6.9.tar.gz')
-md5sums=('6e2dd8b4b2294407693de7cd76ec8998')
+source=("http://varch.googlecode.com/files/$pkgname-$pkgver.tar.gz")
+md5sums=('4e283a10dda3888366f7c3442ee284f4')
 
 build() {
   cd $srcdir/$pkgname-$pkgver
