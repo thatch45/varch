@@ -43,3 +43,16 @@ def convert(fmt, image):
         subprocess.call(q_cmd, shell=True)
         if rm_:
             os.remove(image)
+    if fmt == 'vdi':
+        rm_ = False
+        outimage = image
+        if not image.endswith('vdi'):
+            outimage = image + '.vdi'
+            rm_ = True
+        v_cmd = 'VBoxManage convertfromraw ' + image + ' ' + outimage
+
+        print('Converting to vdi')
+
+        subprocess.call(v_cmd, shell=True)
+        if rm_:
+            os.remove(image)

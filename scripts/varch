@@ -20,7 +20,7 @@ def parse():
             '--format',
             dest='format',
             default='raw',
-            help='The disk image format to use, raw or qcow2; default=raw')
+            help='The disk image format to use, raw, qcow2 or vdi; default=raw')
     parser.add_option('-s',
             '--size',
             dest='size',
@@ -46,6 +46,9 @@ def parse():
     opts['size'] = options.size
     opts['image'] = options.image
     opts['generic'] = options.generic
+
+    if opts['format'] == 'vdi':
+        opts['generic'] = True
 
     return opts
 
