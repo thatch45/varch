@@ -36,7 +36,7 @@ def parse():
             dest='generic',
             default=False,
             action='store_true',
-            help='Generate a generic virtual machine image for use on non-kvm virtual machine monitors, like virtualbox, vmware etc.')
+            help='Generate a generic virtual machine image without support for virtio block drivers')
 
     options, args = parser.parse_args()
 
