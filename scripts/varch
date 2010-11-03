@@ -54,6 +54,9 @@ def parse():
 
 
 if __name__ == '__main__':
+    if not os.getuid():
+        print('Sorry, the creation of virtual machines requires root access')
+        sys.exit(1)
     opts = parse()
     v_arch = varch.VArch(opts)
     v_arch.make_vm()
