@@ -37,7 +37,13 @@ def parse():
             default=False,
             action='store_true',
             help='Generate a generic virtual machine image without support for virtio block drivers')
-
+    parser.add_option('-o',
+            '--overlay',
+            dest='overlay',
+            default='',
+            help='The directory containig files to be coppied into the virtual machine')
+            
+            
     options, args = parser.parse_args()
 
     opts = {}
@@ -46,6 +52,7 @@ def parse():
     opts['size'] = options.size
     opts['image'] = options.image
     opts['generic'] = options.generic
+    opts['overlay'] = options.overlay
 
     if opts['format'] == 'vdi':
         opts['generic'] = True
