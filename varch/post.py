@@ -28,4 +28,9 @@ class Post:
                   + self.target
             subprocess.call(c_cmd, shell=True)
 
+    def run_post(self):
+        '''
+        Execute the post routines.
+        '''
+        self.overlay()
 

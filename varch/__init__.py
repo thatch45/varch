@@ -2,6 +2,7 @@ import varch.image
 import varch.aif
 import varch.grub
 import varch.clean
+import varch.post
 
 class VArch:
     '''
@@ -24,6 +25,9 @@ class VArch:
         
         grub = varch.grub.Grub(self.opts, aif.target, nbd)
         grub.setup_boot()
+
+        post = varch.post.Post(self.opts, aif.target)
+        post.run_post()
 
         varch.clean.umount(nbd)
         varch.clean.detatch(nbd)
