@@ -1,7 +1,7 @@
 # Contributor: Thomas S Hatch <thatch45@gmail.com>
 
 pkgname=varch
-pkgver=0.7.1
+pkgver=0.7.6
 pkgrel=1
 pkgdesc="ArchLinux virtual machine builder"
 arch=(any)
