@@ -9,6 +9,12 @@ import tempfile
 import time
 import threading
 
+class ImageException(Exception):
+    def __init__(self, value):
+        self.value = str(value)
+    def __str__(self):
+        return repr(self.value)
+
 class Image:
     '''
     Manages the image file.
@@ -34,36 +40,10 @@ class Image:
         Create the image file
         '''
         if os.path.isfile(self.opts['image']):
-            print('The image file already exists, EXITING.',
-                    file=sys.stderr)
-            sys.exit(42)
+            raise ImageException(self.opts['image'])
         i_cmd = 'qemu-img create -f raw ' + self.opts['image']\
               + ' ' + self.opts['size']
         subprocess.call(i_cmd, shell=True)
-
-    def _set_nbd(self):
-        '''
-        Abstracts the image as a qemu network block device.
-        '''
-        m_cmd = 'modprobe nbd max_part=63'
-        subprocess.call(m_cmd, shell=True)
-        nbd = ''
-        for fn_ in os.listdir('/dev'):
-            if not fn_.startswith('nbd'):
-                continue
-            fn_ = os.path.join('/dev', fn_)
-            try:
-                open(fn_, 'r').read(1)
-            except:
-                continue
-            nbd = fn_
-        if not nbd:
-            print('''No network block devices are available, please detatch a
-                    network block device and try again''', file=sys.stderr)
-            sys.exit(42)
-        s_cmd = 'qemu-nbd -c ' + nbd + ' ' + self.opts['image']
-        subprocess.call(s_cmd, shell=True)
-        return nbd
 
     def _set_loop(self):
         '''

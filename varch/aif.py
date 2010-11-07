@@ -13,8 +13,7 @@ class AIFException(Exception):
     Raise this exception if there is any problem with the aif system
     '''
     def __init__(self, value):
-        self.value = value
-
+        self.value = str(value)
     def __str__(self):
         return repr(self.value)
 
@@ -26,6 +25,7 @@ class AIF:
         self.opts = opts
         self.nbd = nbd
         self.aif, self.target = self.__mk_conf()
+        self._verify_env()
 
     def __mk_conf(self):
         '''
