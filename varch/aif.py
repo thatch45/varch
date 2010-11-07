@@ -8,6 +8,16 @@ import sys
 import tempfile
 import subprocess
 
+class AIFException(Exception):
+    '''
+    Raise this exception if there is any problem with the aif system
+    '''
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
 class AIF:
     '''
     Manages the aif files, and executes the aif application
@@ -50,6 +60,25 @@ class AIF:
         aif = '/tmp/working.aif'
         open(aif, 'w+').writelines(lines)
         return aif, target
+
+    def _verify_env(self):
+        '''
+        Verify that none of the disk volumes slated for work by aif exist on
+        the system.
+        '''
+        dms = []
+        conflict = []
+        for line in open(self.aif, 'r').readlines():
+            if line.count('/dev/mapper'):
+                dev = line.split()[0]
+                if dev.count(self.nbd):
+                    continue
+                dms.append(dev)
+        for dm_ in dms:
+            if os.path.exists(dm_):
+                conflict.append(dm_)
+        if conflict:
+            raise AIFException(conflict)
             
     def run_aif(self):
         '''
