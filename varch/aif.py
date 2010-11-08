@@ -66,6 +66,7 @@ class AIF:
         Verify that none of the disk volumes slated for work by aif exist on
         the system.
         '''
+        print('Checking that the aif configuration will be safe for the underlying system')
         dms = []
         conflict = []
         for line in open(self.aif, 'r').readlines():
@@ -74,9 +75,21 @@ class AIF:
                 if dev.count(self.nbd):
                     continue
                 dms.append(dev)
+
         for dm_ in dms:
             if os.path.exists(dm_):
                 conflict.append(dm_)
+
+        vgq = "vgdisplay | grep 'VG Name' | awk '{print $3}'"
+        vgs = subprocess.Popen(vgq,
+                shell=True,
+                stdout=subprocess.PIPE).communicate()[0]
+        vgs = bytes.decode(vgs).split()
+
+        for dm_ in dms:
+            if vgs.count(os.path.basename(dm_)):
+                conflict.append(dm_)
+
         if conflict:
             raise AIFException(conflict)
         return dms

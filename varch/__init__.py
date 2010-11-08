@@ -36,11 +36,18 @@ class VArch:
             varch.clean.vgchange(aif.dms)
             varch.clean.detatch(nbd)
             varch.clean.convert(self.opts['format'], self.opts['image'])
-        except AIFException as e:
+
+        except varch.aif.AIFException as e:
             print('The following device conflicts were found ' + e.value,
                     file=sys.stderr)
             sys.exit(42)
-        except ImageException as e:
+        except varch.image.ImageException as e:
             print('The image already exists: ' + e.value,
                     file=sys.stderr)
             sys.exit(43)
+        except Exception as e:
+            print (e.value)
+            varch.clean.umount(nbd, aif.dms)
+            varch.clean.vgchange(aif.dms)
+            varch.clean.detatch(nbd)
+

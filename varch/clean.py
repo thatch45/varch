@@ -27,7 +27,8 @@ def vgchange(dms):
     vgq = "vgdisplay | grep 'VG Name' | awk '{print $3}'"
     vgs = subprocess.Popen(vgq,
             shell=True,
-            stdout=subprocess.PIPE).communicate()[0].split()
+            stdout=subprocess.PIPE).communicate()[0]
+    vgs = bytes.decode(vgs).split()
     for dm_ in dms:
         if vgs.count(os.path.basename(dm_)):
             c_cmd = 'vgchange -a n ' + os.path.basename(dm_)
