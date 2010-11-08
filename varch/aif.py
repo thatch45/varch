@@ -25,7 +25,7 @@ class AIF:
         self.opts = opts
         self.nbd = nbd
         self.aif, self.target = self.__mk_conf()
-        self._verify_env()
+        self.dms = self.__verify_env()
 
     def __mk_conf(self):
         '''
@@ -61,7 +61,7 @@ class AIF:
         open(aif, 'w+').writelines(lines)
         return aif, target
 
-    def _verify_env(self):
+    def __verify_env(self):
         '''
         Verify that none of the disk volumes slated for work by aif exist on
         the system.
@@ -79,6 +79,7 @@ class AIF:
                 conflict.append(dm_)
         if conflict:
             raise AIFException(conflict)
+        return dms
             
     def run_aif(self):
         '''

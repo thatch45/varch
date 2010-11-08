@@ -32,7 +32,8 @@ class VArch:
             post = varch.post.Post(self.opts, aif.target)
             post.run_post()
 
-            varch.clean.umount(nbd)
+            varch.clean.umount(nbd, aif.dms)
+            varch.clean.vgchange(aif.dms)
             varch.clean.detatch(nbd)
             varch.clean.convert(self.opts['format'], self.opts['image'])
         except AIFException as e:
