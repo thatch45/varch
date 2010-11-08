@@ -55,7 +55,10 @@ class Image:
         subprocess.call(m_cmd, shell=True)
         sf_cmd = 'sfdisk ' + self.opts['image'] + ' << EOF\n'\
                + '0,,\nEOF'
-        subprocess.call(sf_cmd, shell=True)
+        sf_out = subprocess.Popen(sf_cmd,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT).communicate()[0]
         kq_cmd = 'kpartx -l ' + self.opts['image']
         loc = subprocess.Popen(kq_cmd, shell=True,
                 stdout=subprocess.PIPE).communicate()[0]
