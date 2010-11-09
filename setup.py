@@ -2,7 +2,7 @@
 
 from distutils.core import setup
 
-setup(name='virtualarch',
+setup(name='varch',
       version='0.7.8',
       description='Virtual machine generator for ArchLinux',
       author='Thomas S Hatch',
