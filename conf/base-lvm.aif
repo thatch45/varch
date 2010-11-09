@@ -16,5 +16,5 @@ BLOCKDATA='/dev/vda1 raw no_label ext4;yes;/boot;target;no_opts;no_label;no_para
 /dev/vda2+ lvm-pv no_label lvm-vg;yes;no_mountpoint;target;no_opts;vmvg;/dev/vda2
 /dev/mapper/vmvg lvm-vg vmvg lvm-lv;yes;no_mountpoint;target;no_opts;root;19G|lvm-lv;yes;no_mountpoint;target;no_opts;swap;512M
 /dev/mapper/vmvg-root lvm-lv root ext4;yes;/;target;no_opts;no_label;no_params
-/dev/mapper/vmvg-root lvm-lv swap swap;yes;no_mountpoint;target;no_opts;no_label;no_params'
+/dev/mapper/vmvg-swap lvm-lv swap swap;yes;no_mountpoint;target;no_opts;no_label;no_params'
 

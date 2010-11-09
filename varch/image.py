@@ -43,7 +43,7 @@ class Image:
             raise ImageException(self.opts['image'])
         i_cmd = 'qemu-img create -f raw ' + self.opts['image']\
               + ' ' + self.opts['size']
-        subprocess.call(i_cmd, shell=True)
+        subprocess.getoutput(i_cmd)
 
     def _set_loop(self):
         '''

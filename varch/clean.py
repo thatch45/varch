@@ -3,6 +3,8 @@ We made quite a mess, time to clean it up!
 '''
 
 import os
+import shutil
+import time
 import subprocess
 
 def umount(nbd, dms):
@@ -14,7 +16,7 @@ def umount(nbd, dms):
     subprocess.getoutput(u_cmd)
     for dm_ in dms:
         u_cmd = 'umount ' + dm_ + '*'
-        subprocess.getoutputl(u_cmd)
+        subprocess.getoutput(u_cmd)
     print('restoring swap state')
     subprocess.getoutput('swapoff -a')
     subprocess.getoutput('swapon -a')
@@ -27,7 +29,8 @@ def vgchange(dms):
     vgq = "vgdisplay | grep 'VG Name' | awk '{print $3}'"
     vgp = subprocess.Popen(vgq,
             shell=True,
-            stdout=subprocess.PIPE)
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE)
     vgout = vgp.communicate()
     vgs = bytes.decode(vgout[0]).split()
     for dm_ in dms:
@@ -75,3 +78,17 @@ def convert(fmt, image):
         subprocess.call(v_cmd, shell=True)
         if rm_:
             os.remove(image)
+
+def backup_log():
+    '''
+    Makes a backup of the mkinitcpio and the pacman log used by aif.
+    '''
+    tag = str(int(time.time()))
+    p_src = '/var/log/aif/pacman.log'
+    p_dst = p_src + '.' + tag + '.bak'
+    m_src = '/var/log/aif/mkinitcpio.log'
+    m_dst = m_src + '.' + tag + '.bak'
+
+    shutil.move(p_src, p_dst)
+    shutil.move(m_src, m_dst)
+

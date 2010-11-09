@@ -67,9 +67,8 @@ class AIF:
         Verify that none of the disk volumes slated for work by aif exist on
         the system.
         '''
-        print('\n\n############################################################################')
+        print('############################################################################')
         print('#Checking that the aif configuration will be safe for the underlying system#')
-        print('############################################################################\n\n')
         time.sleep(1)
         dms = []
         conflict = []
@@ -87,7 +86,8 @@ class AIF:
         vgq = "vgdisplay | grep 'VG Name' | awk '{print $3}'"
         vgp = subprocess.Popen(vgq,
                 shell=True,
-                stdout=subprocess.PIPE)
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE)
         vgout = vgp.communicate()
         vgs = vgout[0]
         vgs = bytes.decode(vgs).split()

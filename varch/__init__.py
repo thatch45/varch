@@ -21,21 +21,35 @@ class VArch:
         # catch failures and keystrokes so that the environment can be properly
         # cleaned up in the event of a failure.
         try:
+            print('############################################################################')
+            print('#                    Creating virtual machine image                        #')
             image = varch.image.Image(self.opts)
             nbd = image.prep_disk()
             aif = varch.aif.AIF(self.opts, nbd)
+            print('############################################################################')
+            print('#                             Executing AIF                                #')
+            print('############################################################################')
             aif.run_aif()
             
+            print('############################################################################')
+            print('#                        Setting up the bootloader                         #')
+            print('############################################################################')
             grub = varch.grub.Grub(self.opts, aif.target, nbd)
             grub.setup_boot()
 
+            print('############################################################################')
+            print('#                     Executing post install operations                    #')
             post = varch.post.Post(self.opts, aif.target)
             post.run_post()
 
+            print('############################################################################')
+            print('#                     Cleaning up the build environment                    #')
+            print('############################################################################')
             varch.clean.umount(nbd, aif.dms)
             varch.clean.vgchange(aif.dms)
             varch.clean.detatch(nbd)
             varch.clean.convert(self.opts['format'], self.opts['image'])
+            varch.clean.backup_log()
 
         except varch.aif.AIFException as e:
             print('The following device conflicts were found ' + e.value,
@@ -45,9 +59,12 @@ class VArch:
             print('The image already exists: ' + e.value,
                     file=sys.stderr)
             sys.exit(43)
-        except Exception as e:
-            print (e.value)
+        except:
+            print('############################################################################')
+            print('#                     Cleaning up the build environment                    #')
+            print('############################################################################')
             varch.clean.umount(nbd, aif.dms)
             varch.clean.vgchange(aif.dms)
             varch.clean.detatch(nbd)
+            varch.clean.backup_log()
 
