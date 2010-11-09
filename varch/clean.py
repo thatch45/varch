@@ -91,6 +91,8 @@ def backup_log():
     m_src = '/var/log/aif/mkinitcpio.log'
     m_dst = m_src + '.' + tag + '.bak'
 
-    shutil.move(p_src, p_dst)
-    shutil.move(m_src, m_dst)
+    if os.path.isfile(p_src):
+        shutil.move(p_src, p_dst)
+    if os.path.isfile(m_src):
+        shutil.move(m_src, m_dst)
 
