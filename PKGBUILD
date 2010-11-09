@@ -14,7 +14,7 @@ makedepends=('python')
 optdepends=('virtualbox-ose: To enable support for virtualbox vdi images')
 options=(!emptydirs)
 source=("http://varch.googlecode.com/files/$pkgname-$pkgver.tar.gz")
-md5sums=('8819bcf9eae384790b9c7a3bda1cc61b')
+md5sums=('a24e6cdec49dcf09a97b923791b88988')
 
 build() {
   cd $srcdir/$pkgname-$pkgver
