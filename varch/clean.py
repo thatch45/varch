@@ -46,6 +46,8 @@ def detatch(nbd):
     l_cmd = 'losetup -d ' + nbd
     subprocess.getoutput(k_cmd)
     subprocess.getoutput(l_cmd)
+    if os.path.islink(nbd):
+        os.remove(nbd)
 
 def convert(fmt, image):
     '''
