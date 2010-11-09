@@ -6,6 +6,7 @@ image.
 import os
 import sys
 import tempfile
+import time
 import subprocess
 
 class AIFException(Exception):
@@ -66,7 +67,10 @@ class AIF:
         Verify that none of the disk volumes slated for work by aif exist on
         the system.
         '''
-        print('Checking that the aif configuration will be safe for the underlying system')
+        print('\n\n############################################################################')
+        print('#Checking that the aif configuration will be safe for the underlying system#')
+        print('############################################################################\n\n')
+        time.sleep(1)
         dms = []
         conflict = []
         for line in open(self.aif, 'r').readlines():
@@ -81,9 +85,11 @@ class AIF:
                 conflict.append(dm_)
 
         vgq = "vgdisplay | grep 'VG Name' | awk '{print $3}'"
-        vgs = subprocess.Popen(vgq,
+        vgp = subprocess.Popen(vgq,
                 shell=True,
-                stdout=subprocess.PIPE).communicate()[0]
+                stdout=subprocess.PIPE)
+        vgout = vgp.communicate()
+        vgs = vgout[0]
         vgs = bytes.decode(vgs).split()
 
         for dm_ in dms:

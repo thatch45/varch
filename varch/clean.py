@@ -11,13 +11,13 @@ def umount(nbd, dms):
     '''
     u_cmd = 'umount ' + nbd + '*'
     print('Unmounting build environment')
-    subprocess.call(u_cmd, shell=True)
+    subprocess.getoutput(u_cmd)
     for dm_ in dms:
         u_cmd = 'umount ' + dm_ + '*'
-        subprocess.call(u_cmd, shell=True)
+        subprocess.getoutputl(u_cmd)
     print('restoring swap state')
-    subprocess.call('swapoff -a', shell=True)
-    subprocess.call('swapon -a', shell=True)
+    subprocess.getoutput('swapoff -a')
+    subprocess.getoutput('swapon -a')
 
 def vgchange(dms):
     '''
@@ -25,14 +25,15 @@ def vgchange(dms):
     them
     '''
     vgq = "vgdisplay | grep 'VG Name' | awk '{print $3}'"
-    vgs = subprocess.Popen(vgq,
+    vgp = subprocess.Popen(vgq,
             shell=True,
-            stdout=subprocess.PIPE).communicate()[0]
-    vgs = bytes.decode(vgs).split()
+            stdout=subprocess.PIPE)
+    vgout = vgp.communicate()
+    vgs = bytes.decode(vgout[0]).split()
     for dm_ in dms:
         if vgs.count(os.path.basename(dm_)):
             c_cmd = 'vgchange -a n ' + os.path.basename(dm_)
-            subprocess.call(c_cmd, shell=True)
+            subprocess.getoutput(c_cmd)
 
 def detatch(nbd):
     '''
@@ -40,8 +41,8 @@ def detatch(nbd):
     '''
     k_cmd = 'kpartx -d ' + nbd
     l_cmd = 'losetup -d ' + nbd
-    subprocess.call(k_cmd, shell=True)
-    subprocess.call(l_cmd, shell=True)
+    subprocess.getoutput(k_cmd)
+    subprocess.getoutput(l_cmd)
 
 def convert(fmt, image):
     '''

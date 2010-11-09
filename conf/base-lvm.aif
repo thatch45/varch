@@ -6,7 +6,7 @@ TIMEZONE=America/Denver
 # packages to install
 TARGET_GROUPS=base 
 TARGET_PACKAGES_EXCLUDE='nano reiserfsprogs'
-TARGET_PACKAGES=openssh
+TARGET_PACKAGES=
 # These variables are mandatory
 
 GRUB_DEVICE=/dev/vda
@@ -14,6 +14,7 @@ PARTITIONS='/dev/vda 100:ext4:+ *:ext4'
 BLOCKDATA='/dev/vda1 raw no_label ext4;yes;/boot;target;no_opts;no_label;no_params
 /dev/vda2 raw no_label lvm-pv;yes;no_mountpoint;target;no_opts;no_label;no_params
 /dev/vda2+ lvm-pv no_label lvm-vg;yes;no_mountpoint;target;no_opts;vmvg;/dev/vda2
-/dev/mapper/vmvg lvm-vg vmvg lvm-lv;yes;no_mountpoint;target;no_opts;root;19G
-/dev/mapper/vmvg-root lvm-lv root xfs;yes;/;target;no_opts;no_label;no_params'
+/dev/mapper/vmvg lvm-vg vmvg lvm-lv;yes;no_mountpoint;target;no_opts;root;19G|lvm-lv;yes;no_mountpoint;target;no_opts;swap;512M
+/dev/mapper/vmvg-root lvm-lv root ext4;yes;/;target;no_opts;no_label;no_params
+/dev/mapper/vmvg-root lvm-lv swap swap;yes;no_mountpoint;target;no_opts;no_label;no_params'
 
