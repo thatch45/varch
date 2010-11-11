@@ -56,7 +56,7 @@ class AIF:
         if not self.opts['generic']:
             lines.extend(['\nworker_mkinitcpio ()\n',
             '{\n',
-            'sed -i s,MODULES=\\",MODULES=\\"virtio\\ virtio_blk\\ virtio_pci\\ , $var_TARGET_DIR/etc/mkinitcpio.conf\n',
+            'sed -i s,MODULES=\\",MODULES=\\"virtio\\ virtio_net\\ virtio_blk\\ virtio_pci\\ , $var_TARGET_DIR/etc/mkinitcpio.conf\n',
             'run_mkinitcpio\n',
             '}\n'])
         aif = '/tmp/working.aif'
