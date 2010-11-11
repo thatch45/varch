@@ -5,6 +5,7 @@ import varch.aif
 import varch.grub
 import varch.clean
 import varch.post
+import varch.genconf
 
 class VArch:
     '''
@@ -17,9 +18,6 @@ class VArch:
         '''
         Create a virtual machine image.
         '''
-        # TODO: Need to wrap these function calls with try/except blocks to
-        # catch failures and keystrokes so that the environment can be properly
-        # cleaned up in the event of a failure.
         try:
             print('############################################################################')
             print('#                    Creating virtual machine image                        #')
@@ -50,6 +48,16 @@ class VArch:
             varch.clean.detatch(nbd)
             varch.clean.convert(self.opts['format'], self.opts['image'])
             varch.clean.backup_log()
+            if self.opts['kvm_conf'] or self.opts['libvirt_conf']:
+                print('############################################################################')
+                print('#              Generating virtual machine configuration files              #')
+                print('############################################################################')
+                genconf = varch.genconf.GenConf(self.opts)
+                if self.opts['kvm_conf']:
+                    genconf.gen_kvm()
+                if self.opts['libvirt_conf']:
+                    genconf.gen_libvirt()
+
 
         except varch.aif.AIFException as e:
             print('The following device conflicts were found ' + e.value,

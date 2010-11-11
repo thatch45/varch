@@ -42,6 +42,18 @@ def parse():
             dest='overlay',
             default='',
             help='The directory containig files to be coppied into the virtual machine')
+    parser.add_option('-K',
+            '--kvm-conf',
+            dest='kvm_conf',
+            default=False,
+            action='store_true',
+            help='This flag instructs varch to generate a kvm shell script to start the generated virtual machine.')
+    parser.add_option('-L',
+            '--libvirt-conf',
+            dest='libvirt_conf',
+            default=False,
+            action='store_true',
+            help='This flag instructs varch to generate a libvirt xml configuration file')
             
             
     options, args = parser.parse_args()
@@ -53,6 +65,8 @@ def parse():
     opts['image'] = options.image
     opts['generic'] = options.generic
     opts['overlay'] = options.overlay
+    opts['kvm_conf'] = options.kvm_conf
+    opts['libvirt_conf'] = options.libvirt_conf
 
     if opts['format'] == 'vdi':
         opts['generic'] = True
