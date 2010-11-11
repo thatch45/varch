@@ -52,6 +52,7 @@ class AIF:
                 sys.exit()
         lines.append('var_TARGET_DIR=' + target  + '\n')
         lines.append('PACMAN_TARGET="pacman --root $var_TARGET_DIR --config /tmp/pacman.conf"\n')
+
         if not self.opts['generic']:
             lines.extend(['\nworker_mkinitcpio ()\n',
             '{\n',
