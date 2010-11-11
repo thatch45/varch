@@ -47,7 +47,7 @@ def parse():
             dest='kvm_conf',
             default=False,
             action='store_true',
-            help='This flag instructs varch to generate a kvm shell script to start the generated virtual machine.')
+            help='This flag instructs varch to generate a kvm shell script to start the generated virtual machine')
     parser.add_option('-L',
             '--libvirt-conf',
             dest='libvirt_conf',

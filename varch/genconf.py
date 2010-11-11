@@ -106,7 +106,7 @@ class GenConf:
             "  </devices>\n",
             "</domain>\n",
             ]
-            open(fn_, 'w+').writelines(lines)
+        open(fn_, 'w+').writelines(lines)
 
     def gen_open_nebula(self):
         '''
