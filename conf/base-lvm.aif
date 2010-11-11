@@ -1,5 +1,5 @@
 SOURCE=net
-SYNC_URL=http://mirror.rit.edu/archlinux/\$repo/os/x86_64
+SYNC_URL=http://mirror.rit.edu/archlinux/\$repo/os/\$arch
 HARDWARECLOCK=UTC
 TIMEZONE=America/Denver
 
