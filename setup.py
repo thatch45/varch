@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='varch',
-      version='0.7.8',
+      version='0.7.9',
       description='Virtual machine generator for ArchLinux',
       author='Thomas S Hatch',
       author_email='thatch45@gmail.com',
@@ -13,7 +13,12 @@ setup(name='varch',
       data_files=[('/etc/varch',
                     ['conf/base.aif',
                      'conf/base-lvm.aif',
-                     'conf/base-single.aif']),
+                     'conf/base-single.aif',
+                     'conf/kde-lvm.aif',
+                     'conf/kde-single.aif',
+                     'sshon-lvm.aif',
+                     'sshon-single.aif',
+                     ]),
                  ],
      )
 
