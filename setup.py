@@ -12,7 +12,8 @@ setup(name='varch',
       scripts=['scripts/varch'],
       data_files=[('/etc/varch',
                     ['conf/base.aif',
-                     'conf/base-lvm.aif']),
+                     'conf/base-lvm.aif',
+                     'conf/base-single.aif']),
                  ],
      )
 

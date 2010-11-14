@@ -1,0 +1,15 @@
+SOURCE=net
+SYNC_URL=http://mirror.rit.edu/archlinux/\$repo/os/\$arch
+HARDWARECLOCK=UTC
+TIMEZONE=America/Denver
+
+# packages to install
+TARGET_GROUPS=base       
+TARGET_PACKAGES_EXCLUDE='nano reiserfsprogs'
+TARGET_PACKAGES=openssh 
+
+# These variables are mandatory
+
+GRUB_DEVICE=/dev/vda
+PARTITIONS='/dev/vda *:ext4:+'
+BLOCKDATA='/dev/vda1 raw no_label ext4;yes;/boot;target;no_opts;no_label;no_params'

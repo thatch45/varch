@@ -48,16 +48,13 @@ class VArch:
             varch.clean.detatch(nbd)
             varch.clean.convert(self.opts['format'], self.opts['image'])
             varch.clean.backup_log()
-            if self.opts['kvm_conf'] or self.opts['libvirt_conf']:
+            if self.opts['kvm_conf']:
                 print('############################################################################')
                 print('#              Generating virtual machine configuration files              #')
                 print('############################################################################')
                 genconf = varch.genconf.GenConf(self.opts)
                 if self.opts['kvm_conf']:
                     genconf.gen_kvm()
-                if self.opts['libvirt_conf']:
-                    genconf.gen_libvirt()
-
 
         except varch.aif.AIFException as e:
             print('The following device conflicts were found ' + e.value,

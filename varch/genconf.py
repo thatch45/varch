@@ -43,7 +43,7 @@ class GenConf:
         fn_ = os.path.join(self._dir, self.opts['image'] + '-kvm.sh')
         lines = [
             'qemu-kvm -drive file=' + self.opts['image'] + ',if=virtio,'\
-            + 'boot=on -net nic,model=virtio -m 512\n',
+            + 'boot=on -m 512\n',
             ]
         open(fn_, 'w+').writelines(lines)
         os.chmod(fn_, stat.S_IXOTH)
