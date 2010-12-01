@@ -5,7 +5,6 @@ This module needs to support qemu-kvm, qemu, libvirt and open nebula
 '''
 
 import os
-import stat
 import uuid
 import random
 
@@ -46,7 +45,7 @@ class GenConf:
             + 'boot=on -m 512\n',
             ]
         open(fn_, 'w+').writelines(lines)
-        os.chmod(fn_, 0755)
+        os.chmod(fn_, 493)
 
     def gen_libvirt(self):
         '''

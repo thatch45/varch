@@ -54,8 +54,10 @@ class VArch:
                 print('############################################################################')
                 genconf = varch.genconf.GenConf(self.opts)
                 if self.opts['kvm_conf']:
+                    print('Generating kvm startup script')
                     genconf.gen_kvm()
                 if self.opts['libvirt_conf']:
+                    print('Generating libvirt configuration')
                     genconf.gen_libvirt()
 
         except varch.aif.AIFException as e:
