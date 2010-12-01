@@ -1,8 +1,8 @@
 '''
 A numer of operations may need to be executed - post install - like the
-application overlay and automated instalation of AUR packages.
+application overlay.
 There may also be things that are desired which may be easier to do outside
-the scope of the aif file
+the scope of the aif file.
 '''
 
 import subprocess
@@ -21,6 +21,7 @@ class Post:
         '''
         Apply an optional overlay
         '''
+        # I am being lazy, I shouldn't have to shell out here
         if not self.opts['overlay']:
             return
         if os.path.isdir(self.opts['overlay']):
