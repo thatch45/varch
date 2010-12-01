@@ -2,14 +2,15 @@
 
 pkgname=varch
 pkgver=0.8
-pkgrel=1
+pkgrel=2
 pkgdesc="ArchLinux virtual machine builder"
 arch=(any)
 url="http://code.google.com/p/varch/"
 license=("GPL3")
 depends=('python'
          'multipath-tools'
-         'aif')
+         'aif'
+         'qemu')
 makedepends=('python')
 optdepends=('virtualbox-ose: To enable support for virtualbox vdi images')
 optdepends=('libvirtd: To use generated virtual machines with libvirt')
