@@ -55,6 +55,8 @@ class VArch:
                 genconf = varch.genconf.GenConf(self.opts)
                 if self.opts['kvm_conf']:
                     genconf.gen_kvm()
+                if self.opts['libvirt_conf']:
+                    genconf.gen_libvirt()
 
         except varch.aif.AIFException as e:
             print('The following device conflicts were found ' + e.value,
