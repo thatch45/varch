@@ -46,9 +46,7 @@ class GenConf:
             + 'boot=on -m 512\n',
             ]
         open(fn_, 'w+').writelines(lines)
-        os.chmod(fn_, stat.S_IXOTH)
-        os.chmod(fn_, stat.S_IXGRP)
-        os.chmod(fn_, stat.S_IXUSR)
+        os.chmod(fn_, 0755)
 
     def gen_libvirt(self):
         '''
@@ -114,7 +112,7 @@ class GenConf:
 
     def gen_open_nebula(self):
         '''
-        Generates a open nebula configuration file
+        Generates a open nebula configuration file, well, not yet :)
         '''
         fn_ = os.path.join(self._dir, self.opts['image'] + '.one')
         
