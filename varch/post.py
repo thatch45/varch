@@ -8,6 +8,7 @@ the scope of the aif file.
 import subprocess
 import os
 import sys
+import shutil
 
 class Post:
     '''
@@ -16,6 +17,7 @@ class Post:
     def __init__(self, opts, target):
         self.opts = opts
         self.target = target
+        self._dir = os.path.dirname(self.opts['image'])
 
     def overlay(self):
         '''
@@ -29,9 +31,23 @@ class Post:
                   + self.target
             subprocess.call(c_cmd, shell=True)
 
+    def pull_boot('self'):
+        '''
+        Copy out the kernel and initrd before finalizing the virtual machine
+        image
+        '''
+        kernel = os.path.join(self.target, 'boot/vmlinuz26')
+        initcpio = os.path.join(self.target, 'boot/kernel26.img')
+        shutil.copy(kernel, os.path.join(self._dir, self.opts['image'] +
+            '_vmlinuz26'))
+        shutil.copy(initcpio, os.path.join(self._dir, self.opts['image'] +
+            '_kernel26.img'))
+
     def run_post(self):
         '''
         Execute the post routines.
         '''
         self.overlay()
+        if self.opts['pull_boot']:
+            self.pull_boot()
 
