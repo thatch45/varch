@@ -51,6 +51,9 @@ class GenConf:
         '''
         Generates a libvirt configuration file
         '''
+        img_path = self.opts['image']
+        if not self.opts['image'].startswith('/'):
+            img_path = os.path.join(os.getcwd(), self.opts['image'])
         fn_ = os.path.join(self._dir, self.opts['image'] + '-virt.xml')
         lines = [
             "<domain type='kvm'>\n",
@@ -76,7 +79,7 @@ class GenConf:
             "    <emulator>/usr/bin/qemu-kvm</emulator>\n",
             "    <disk type='file' device='disk'>\n",
             "      <driver name='qemu' type='raw'/>\n",
-            "      <source file='" + self.opts['image'] + "'/>\n",
+            "      <source file='" + img_path + "'/>\n",
             "      <target dev='vda' bus='virtio'/>\n",
             "      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>\n",
             "    </disk>\n",
@@ -108,6 +111,13 @@ class GenConf:
             "</domain>\n",
             ]
         open(fn_, 'w+').writelines(lines)
+        sn_ = os.path.join(self._dir, self.opts['image'] + '-libvirt.sh')
+        lines = [
+                '#!/bin/bash\n',
+                'virsh -c qemu:///system create ' + fn_ + '\n',
+                ]
+        open(sn_, 'w+').writelines(lines)
+        os.chmod(sn_, 493)
 
     def gen_open_nebula(self):
         '''
