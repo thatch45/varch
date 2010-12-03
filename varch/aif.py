@@ -35,6 +35,9 @@ class AIF:
         '''
         target = tempfile.mkdtemp()
         lines = open(self.opts['conf'], 'r').readlines()
+        pac_conf = '/tmp/pacman.conf'
+        if self.opts['pacman_conf']:
+            pac_conf = self.opts['pacman.conf']
         err = 0
         for index in range(0, len(lines)):
             lines[index] = lines[index].replace('GRUB_DEVICE=/dev/sda',
@@ -51,7 +54,7 @@ class AIF:
                         file=sys.stderr)
                 sys.exit()
         lines.append('var_TARGET_DIR=' + target  + '\n')
-        lines.append('PACMAN_TARGET="pacman --root $var_TARGET_DIR --config /tmp/pacman.conf --cachedir=/var/cache/pacman/pkg"\n')
+        lines.append('PACMAN_TARGET="pacman --root $var_TARGET_DIR --config ' + pac_conf + ' --cachedir=/var/cache/pacman/pkg"\n')
 
         if not self.opts['generic']:
             lines.extend(['\nworker_mkinitcpio ()\n',
