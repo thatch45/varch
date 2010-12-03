@@ -31,7 +31,7 @@ class Post:
                   + self.target
             subprocess.call(c_cmd, shell=True)
 
-    def pull_boot('self'):
+    def pull_boot(self):
         '''
         Copy out the kernel and initrd before finalizing the virtual machine
         image

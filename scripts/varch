@@ -37,6 +37,11 @@ def parse():
             default=False,
             action='store_true',
             help='Generate a generic virtual machine image without support for virtio block drivers')
+    parser.add_option('-p',
+            '--pacman-conf',
+            dest='pacman_conf',
+            default='',
+            help='Normally varch will use a generic set of pacman repos, set this an alternative pacman configuration file')
     parser.add_option('-o',
             '--overlay',
             dest='overlay',
