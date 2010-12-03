@@ -75,6 +75,7 @@ def parse():
     opts['size'] = options.size
     opts['image'] = options.image
     opts['generic'] = options.generic
+    opts['pacman_conf'] = options.pacman_conf
     opts['overlay'] = options.overlay
     opts['pull_boot'] = options.pull_boot
     opts['kvm_conf'] = options.kvm_conf
