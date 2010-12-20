@@ -11,7 +11,7 @@ TARGET_PACKAGES='openssh vim xf86-video-cirrus xf86-video-vesa nfs-utils rsyslog
 # These variables are mandatory
 
 GRUB_DEVICE=/dev/vda
-PARTITIONS='/dev/vda *:ext4:+'
+PARTITIONS='/dev/vda 100:ext4:+ *:ext4'
 BLOCKDATA='/dev/vda1 raw no_label ext4;yes;/boot;target;no_opts;no_label;no_params
 /dev/vda2 raw no_label lvm-pv;yes;no_mountpoint;target;no_opts;no_label;no_params
 /dev/vda2+ lvm-pv no_label lvm-vg;yes;no_mountpoint;target;no_opts;vmvg;/dev/vda2
