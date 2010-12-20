@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='varch',
-      version='0.8.1',
+      version='0.8.2',
       description='Virtual machine generator for ArchLinux',
       author='Thomas S Hatch',
       author_email='thatch45@gmail.com',
