@@ -56,30 +56,18 @@ def convert(fmt, image):
     '''
     if fmt == 'qcow2':
         rm_ = False
-        outimage = image
-        if not image.endswith('qcow2') or not image.endswith('qcow'):
-            outimage = image + '.qcow2'
-            rm_ = True
-        q_cmd = 'qemu-img convert -O qcow2 ' + image + ' ' + outimage
+        q_cmd = 'qemu-img convert -O qcow2 ' + image + ' ' + image
 
         print('Converting to qcow2')
 
         subprocess.call(q_cmd, shell=True)
-        if rm_:
-            os.remove(image)
     if fmt == 'vdi':
         rm_ = False
-        outimage = image
-        if not image.endswith('vdi'):
-            outimage = image + '.vdi'
-            rm_ = True
-        v_cmd = 'VBoxManage convertfromraw ' + image + ' ' + outimage
+        v_cmd = 'VBoxManage convertfromraw ' + image + ' ' + image
 
         print('Converting to vdi')
 
         subprocess.call(v_cmd, shell=True)
-        if rm_:
-            os.remove(image)
 
 def backup_log():
     '''
