@@ -11,7 +11,7 @@ depends=('python>=3.1'
          'multipath-tools'
          'aif'
          'qemu')
-optdepends=('virtualbox-ose: To enable support for virtualbox vdi images'
+optdepends=('virtualbox: To enable support for virtualbox vdi images'
             'libvirtd: To use generated virtual machines with libvirt'
             'qemu-kvm: Run kvm virtual machines')
 options=(!emptydirs)

@@ -48,7 +48,7 @@ class VArch:
             varch.clean.detatch(nbd)
             varch.clean.convert(self.opts['format'], self.opts['image'])
             varch.clean.backup_log()
-            if self.opts['kvm_conf']:
+            if self.opts['kvm_conf'] or self.opts['libvirt_conf']:
                 print('############################################################################')
                 print('#              Generating virtual machine configuration files              #')
                 print('############################################################################')
