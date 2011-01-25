@@ -6,6 +6,7 @@ import os
 import shutil
 import time
 import subprocess
+import random
 
 def umount(nbd, dms):
     '''
@@ -55,19 +56,23 @@ def convert(fmt, image):
     execute the propper conversion routine.
     '''
     if fmt == 'qcow2':
-        rm_ = False
-        q_cmd = 'qemu-img convert -O qcow2 ' + image + ' ' + image
+        outimage = image + str(random.randint(10000000,99999999))
+        q_cmd = 'qemu-img convert -O qcow2 ' + image + ' ' + outimage
 
         print('Converting to qcow2')
 
         subprocess.call(q_cmd, shell=True)
+
+        shutil.move(outimage, image)
     if fmt == 'vdi':
-        rm_ = False
-        v_cmd = 'VBoxManage convertfromraw ' + image + ' ' + image
+        outimage = image + str(random.randint(10000000,99999999))
+        v_cmd = 'VBoxManage convertfromraw ' + image + ' ' + outimage
 
         print('Converting to vdi')
 
         subprocess.call(v_cmd, shell=True)
+
+        shutil.move(outimage, image)
 
 def backup_log():
     '''
