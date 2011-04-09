@@ -1,0 +1,59 @@
+.TH varch 1 "January 2011" "varch 0.9.0" "varch Manual"
+
+.SH NAME
+varch \- ArchLinux virtual machine builder
+
+.SH SYNOPSIS
+Usage:
+.B varch
+[ options ]
+
+.SH DESCRIPTION
+varch creates lightweight virtual machines
+
+.SH OPTIONS
+
+.TP
+-c CONF, --config=CONF, --conf=CONF
+The location to the Archlinux Instalation Framework file; default=/etc/varch/base.aif
+
+.TP
+-f FORMAT, --format=FORMAT
+The disk image format to use, raw, qcow2 or vdi; default=raw
+
+.TP
+-s SIZE, --size=SIZE
+The size of the disk image, default=20G
+
+.TP
+-i IMAGE, --image=IMAGE
+The location of the image after it has been created; default=arch
+
+.TP
+-g, --generic
+Generate a generic virtual machine image without support for virtio block drivers. Use this option when creating a virtual machine image for any hypervisor other than kvm.
+
+.TP
+-p PACMAN_CONF, --pacman-conf=PACMAN_CONF
+Normally varch will use a generic set of pacman repos, set this an alternative pacman configuration file to enable the inclusion of additional repos in the build process.
+
+.TP
+-o OVERLAY, --overlay=OVERLAY
+An optional directory containig files to be coppied into the virtual machine.
+
+.TP
+-k, --pull-boot
+Instruct varch to copy out the kernel and initrd before finalizing the vm.
+
+.TP
+-K, --kvm-conf
+This flag instructs varch to generate a kvm shell script to start the generated virtual machine.
+
+.TP
+-L, --libvirt-conf
+This flag instructs varch to generate a libvirt xml configuration file.
+
+.SH AUTHORS
+Thomas Hatch <thatch at gmail.com>
+.P
+Thomas Dziedzic <gostrc at gmail.com>
