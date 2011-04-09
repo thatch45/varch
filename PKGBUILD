@@ -15,11 +15,11 @@ optdepends=('virtualbox: To enable support for virtualbox vdi images'
             'libvirtd: To use generated virtual machines with libvirt'
             'qemu-kvm: Run kvm virtual machines')
 options=(!emptydirs)
-source=("http://varch.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")
-md5sums=('366909e966ccff0593c4df0664559c45')
+source=("https://github.com/downloads/thatch45/varch/$pkgname-$pkgver.tar.gz")
+md5sums=('0cd33a9e5411fc5b0c17683119381bf5')
 
 package() {
-  cd ${srcdir}/${pkgname}-${pkgver}
-  python setup.py install --root=${pkgdir}/ --optimize=1
+  cd $srcdir/$pkgname-$pkgver
+  python setup.py install --root=$pkgdir/ --optimize=1
 }
         
