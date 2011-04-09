@@ -1,11 +1,11 @@
-# Contributor: Thomas S Hatch <thatch45@gmail.com>
+# Maintainer: Thomas S Hatch <thatch45@gmail.com>
 
 pkgname=varch
-pkgver=0.8.4
+pkgver=0.9.0
 pkgrel=1
 pkgdesc="ArchLinux virtual machine builder"
 arch=(any)
-url="http://code.google.com/p/varch/"
+url="https://github.com/thatch45/varch"
 license=("GPL3")
 depends=('python>=3.1'
          'multipath-tools'

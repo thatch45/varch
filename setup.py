@@ -3,11 +3,11 @@
 from distutils.core import setup
 
 setup(name='varch',
-      version='0.8.4',
+      version='0.9.0',
       description='Virtual machine generator for ArchLinux',
       author='Thomas S Hatch',
       author_email='thatch45@gmail.com',
-      url='http://code.google.com/p/enterprise-archlinux/',
+      url='https://github.com/thatch45/varch',
       packages=['varch'],
       scripts=['scripts/varch'],
       data_files=[('/etc/varch',
@@ -19,6 +19,9 @@ setup(name='varch',
                      'conf/sshon-lvm.aif',
                      'conf/sshon-single.aif',
                      ]),
+                   ('/usr/share/man/man1',
+                    ['man/varch.1',
+                    ]),
                  ],
      )
 
