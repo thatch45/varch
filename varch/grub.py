@@ -32,7 +32,7 @@ class Grub:
                 if self.opts['generic']:
                     lines[ind] = s.replace(self.nbd + 'p', '/dev/sda')
                 else:
-                    lines[ind] = s.replace(self.nbd + 'p', '/dev/vda')
+                    lines[ind] = s.replace('/dev/sda', '/dev/vda')
         open(lst, 'w').writelines(lines)
         return grub_root
 
